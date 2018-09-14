@@ -1,13 +1,12 @@
 PATH
   remote: .
   specs:
-    oop (0.1.0)
+    ipgeobase (0.1.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.3)
-    minitest (5.11.3)
     rake (10.5.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -28,8 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  minitest (~> 5.0)
-  oop!
+  ipgeobase!
   rake (~> 10.0)
   rspec (~> 3.8)
 

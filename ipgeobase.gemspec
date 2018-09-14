@@ -1,16 +1,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "oop/version"
+require "ipgeobase/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "oop"
-  spec.version       = Oop::VERSION
+  spec.name          = "ipgeobase"
+  spec.version       = Ipgeobase::VERSION
   spec.authors       = ["Anvar Tuykin"]
   spec.email         = ["tuykin@gmail.com"]
 
   spec.summary       = %q{This is gem created for OOP Workshop.}
-  spec.homepage      = "https://github.com/tuykin/oop/"
+  spec.homepage      = "https://github.com/tuykin/ipgeobase/"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
