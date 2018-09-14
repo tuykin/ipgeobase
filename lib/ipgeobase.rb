@@ -1,6 +1,6 @@
 require "ipgeobase/version"
 require "ipgeobase/sample"
+require "ipgeobase/geo_object"
 
 module Ipgeobase
-  # Your code goes here...
 end
