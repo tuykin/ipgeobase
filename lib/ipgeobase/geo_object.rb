@@ -3,7 +3,7 @@ require 'uri'
 require 'nokogiri'
 
 class Ipgeobase::GeoObject
-  attr_reader :ip, :inetnum, :country, :city, :region, :district, :lat, :lng
+  attr_reader :ip, :inetnum, :country, :city, :region, :district, :latitude, :longtitude
 
   def self.build(ip)
     response = get_response(ip)
@@ -37,8 +37,8 @@ class Ipgeobase::GeoObject
       city: doc.xpath('//ip-answer/ip/city').text,
       region: doc.xpath('//ip-answer/ip/region').text,
       district: doc.xpath('//ip-answer/ip/district').text,
-      lat: doc.xpath('//ip-answer/ip/lat').text,
-      lng: doc.xpath('//ip-answer/ip/lng').text
+      latitude: doc.xpath('//ip-answer/ip/lat').text,
+      longtitude: doc.xpath('//ip-answer/ip/lng').text
     }
   end
 end
