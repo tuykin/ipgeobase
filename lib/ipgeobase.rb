@@ -1,11 +1,12 @@
 require "ipgeobase/version"
 require "ipgeobase/sample"
-require "ipgeobase/geo_object"
 require "ipgeobase/ext_enum"
 require "ipgeobase/array"
 require "ipgeobase/string"
 
 module Ipgeobase
+  autoload 'GeoObject', 'ipgeobase/geo_object'
+
   def self.get(ip)
     GeoObject.build(ip)
   end
