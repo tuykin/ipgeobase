@@ -3,7 +3,7 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-class Ipgeobase::MetaWeather
+class Ipgeobase::Weather::MetaWeather
   URL = "https://www.metaweather.com/api"
 
   def self.weather_by_name(location_name)

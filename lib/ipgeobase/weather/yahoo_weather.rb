@@ -1,7 +1,7 @@
 require 'ostruct'
 require 'weather-api'
 
-class Ipgeobase::YahooWeather
+class Ipgeobase::Weather::YahooWeather
   def self.weather_by_name(location_name)
     response = Weather.lookup_by_location(location_name, Weather::Units::CELSIUS)
     map_weather(response)
