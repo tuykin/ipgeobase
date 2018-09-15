@@ -1,5 +1,4 @@
 require "ipgeobase/version"
-require "ipgeobase/sample"
 require "ipgeobase/ext_enum"
 require "ipgeobase/array"
 require "ipgeobase/string"
