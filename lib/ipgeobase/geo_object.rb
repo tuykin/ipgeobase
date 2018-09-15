@@ -6,7 +6,7 @@ require 'ipaddr'
 class Ipgeobase::GeoObject
   attr_reader :ip, :inetnum, :country, :city, :region, :district, :latitude, :longtitude
 
-  def self.build(ip)
+  def self.build(ip, client)
     return new({}) if ip.nil?
 
     begin
@@ -15,7 +15,7 @@ class Ipgeobase::GeoObject
       return new({})
     end
 
-    response = get_response(ip)
+    response = client.get_response(ip)
     doc = parse_response(response)
     obj = build_object(doc)
     new(obj)
@@ -28,11 +28,6 @@ class Ipgeobase::GeoObject
   end
 
   private
-
-  def self.get_response(ip)
-    uri = URI.parse("http://ipgeobase.ru:7020/geo?ip=#{ip}")
-    Net::HTTP.get_response(uri)
-  end
 
   def self.parse_response(response)
     Nokogiri::XML(response.body)
