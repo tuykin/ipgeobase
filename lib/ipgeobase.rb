@@ -13,6 +13,6 @@ module Ipgeobase
   end
 
   def self.weather_for(city)
-    MetaWeather.weather_for(city)
+    MetaWeather.weather_by_name(city)
   end
 end

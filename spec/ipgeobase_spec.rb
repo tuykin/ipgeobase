@@ -44,12 +44,16 @@ describe Ipgeobase do
   end
 
   describe '.weather_for' do
-    let(:location_id) { 44418 }
+    let(:location_name) { 'london' }
+    let(:location_id) { '44418' }
 
     it do
       stub_request(:get, "https://www.metaweather.com/api/location/#{location_id}/")
         .to_return(body: load_fixture('meta_weather_location.json'))
-      obj = Ipgeobase.weather_for(location_id)
+      stub_request(:get, "https://www.metaweather.com/api/location/search/?query=#{location_name}/")
+        .to_return(body: load_fixture('meta_weather_location_search.json'))
+
+      obj = Ipgeobase.weather_for(location_name)
       expect(obj.applicable_date).to eq('2018-09-15')
       expect(obj.the_temp).to eq(20.189999999999998)
     end
