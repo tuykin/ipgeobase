@@ -14,15 +14,13 @@ module Ipgeobase
     files = Dir.glob("*")
 
     res = files
-            .select { |f| !f.start_with?('.') }
-            .sort
-            .middle
-            .plural('s')
-            .upcase
+          .reject { |f| f.start_with?('.') }
+          .sort
+          .middle
+          .plural('s')
+          .upcase
 
     puts res
     res
   end
-
-
 end
