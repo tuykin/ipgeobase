@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'webmock/rspec'
 
 class Ipgeobase::ClientStub
   def self.get_response(ip)
@@ -6,7 +7,7 @@ class Ipgeobase::ClientStub
   end
 end
 
-describe do
+describe Ipgeobase do
   describe '.get' do
     subject { Ipgeobase.get(ip, Ipgeobase::ClientStub) }
 
@@ -40,5 +41,17 @@ describe do
     #   it { expect(subject.ip).to eq(ip) }
     #   it { expect(subject.city).to eq(nil) }
     # end
+  end
+
+  describe '.weather_for' do
+    let(:location_id) { 44418 }
+
+    it do
+      stub_request(:get, "https://www.metaweather.com/api/location/#{location_id}/")
+        .to_return(body: load_fixture('meta_weather_location.json'))
+      obj = Ipgeobase.weather_for(location_id)
+      expect(obj.applicable_date).to eq('2018-09-15')
+      expect(obj.the_temp).to eq(20.189999999999998)
+    end
   end
 end
