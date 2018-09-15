@@ -6,14 +6,12 @@ end
 
 describe Ipgeobase do
   describe '.get' do
-    subject { Ipgeobase.get_location(ip, Ipgeobase::ClientStub) }
+    subject { Ipgeobase.get(ip, Ipgeobase::ClientStub) }
 
     context 'ip is valid' do
       let(:ip) { '178.204.73.174' }
 
-      it do
-        expect(subject.ip).to eq(ip)
-      end
+      it { expect(subject.ip).to eq(ip) }
       it do
         is_expected.to have_attributes(
             city: 'Казань',
