@@ -2,23 +2,17 @@ class Ipgeobase::Weather
   autoload 'MetaWeather', 'ipgeobase/weather/meta_weather'
   autoload 'YahooWeather', 'ipgeobase/weather/yahoo_weather'
 
-  attr_reader :service
-
-  def self.build(service: nil)
-    service ||= :metaweather
-    new(service)
+  def self.build(service_provider = :metaweather)
+    new(service_provider)
   end
 
-  def initialize(service)
-    @service = service
+  def initialize(service_provider)
+    @service_obj = services[service_provider].new
   end
 
-  def weather_for(city, service = nil)
-    if service.nil?
-      service_class.weather_by_name(city)
-    else
-      services[service].weather_by_name(city)
-    end
+  def weather_for(city, service_provider = nil)
+    return @service_obj.weather_by_name(city) if service_provider.nil?
+    services[service_provider].new.weather_by_name(city)
   end
 
   def services
@@ -30,11 +24,5 @@ class Ipgeobase::Weather
       metaweather: MetaWeather,
       yahooweather: YahooWeather
     }
-  end
-
-  private
-
-  def service_class
-    services[service]
   end
 end

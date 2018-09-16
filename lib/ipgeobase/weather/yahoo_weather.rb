@@ -2,14 +2,14 @@ require 'ostruct'
 require 'weather-api'
 
 class Ipgeobase::Weather::YahooWeather
-  def self.weather_by_name(location_name)
+  def weather_by_name(location_name)
     response = Weather.lookup_by_location(location_name, Weather::Units::CELSIUS)
     map_weather(response)
   end
 
   private
 
-  def self.map_weather(response)
+  def map_weather(response)
     OpenStruct.new(
         {
           location: response.location.city,

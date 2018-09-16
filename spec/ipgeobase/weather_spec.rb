@@ -35,7 +35,7 @@ describe Ipgeobase::Weather do
           .with(query: hash_including(:q))
           .to_return(body: load_fixture('yahoo_weather.json'))
 
-        service = Ipgeobase::Weather.build(service: :yahooweather)
+        service = Ipgeobase::Weather.build(:yahooweather)
         obj = service.weather_for(location_name)
         expect(obj.location).to eq('Nice')
         expect(obj.date).to eq(Date.parse('2016-08-17'))

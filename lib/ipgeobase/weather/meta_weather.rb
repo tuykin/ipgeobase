@@ -6,7 +6,7 @@ require 'json'
 class Ipgeobase::Weather::MetaWeather
   URL = "https://www.metaweather.com/api"
 
-  def self.weather_by_name(location_name)
+  def weather_by_name(location_name)
     location = search_for_location(location_name)
     return {} if location.empty?
     weather_by_id(location.woeid)
@@ -14,21 +14,21 @@ class Ipgeobase::Weather::MetaWeather
 
   private
 
-  def self.weather_by_id(location_id)
+  def weather_by_id(location_id)
     uri = URI.parse("#{URL}/location/#{location_id}/")
     response = Net::HTTP.get_response(uri)
     response_hash = JSON.parse(response.body)
     map_weather(response_hash)
   end
 
-  def self.search_for_location(query)
+  def search_for_location(query)
     uri = URI.parse("#{URL}/location/search/?query=#{query}")
     response = Net::HTTP.get_response(uri)
     response_hash = JSON.parse(response.body)
     map_location(response_hash)
   end
 
-  def self.map_weather(response_hash)
+  def map_weather(response_hash)
     item = response_hash['consolidated_weather'][0]
     OpenStruct.new(
         {
@@ -44,7 +44,7 @@ class Ipgeobase::Weather::MetaWeather
       )
   end
 
-  def self.map_location(response_hash)
+  def map_location(response_hash)
     item = response_hash[0]
     return {} if item.nil?
     OpenStruct.new(item)

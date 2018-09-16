@@ -19,7 +19,7 @@ class Ipgeobase::CLI
       puts 'city parameter should be added'
       exit(-1)
     end
-    service = Ipgeobase::Weather.build(service: options[:service].to_sym)
+    service = Ipgeobase::Weather.build(options[:service].to_sym)
     weather = service.weather_for(city)
     puts stringify(weather)
   end
