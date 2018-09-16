@@ -1,12 +1,17 @@
 class Ipgeobase::Weather
   autoload 'MetaWeather', 'ipgeobase/weather/meta_weather'
   autoload 'YahooWeather', 'ipgeobase/weather/yahoo_weather'
+  BASE_SERVICES = {
+      metaweather: MetaWeather,
+      yahooweather: YahooWeather
+    }.freeze
 
   def self.build(service_provider = :metaweather)
     new(service_provider)
   end
 
-  def initialize(service_provider)
+  def initialize(service_provider, custom_services = {})
+    @services = BASE_SERVICES.merge(custom_services)
     @service_obj = services[service_provider].new
   end
 
@@ -16,13 +21,10 @@ class Ipgeobase::Weather
   end
 
   def services
-    self.class.services
+    @services
   end
 
   def self.services
-    {
-      metaweather: MetaWeather,
-      yahooweather: YahooWeather
-    }
+    BASE_SERVICES
   end
 end

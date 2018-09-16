@@ -100,6 +100,44 @@ weather = service.weather_for('berlin')
 #   - :metaweather
 ```
 
+If you want to use your custom provider:
+```(ruby)
+
+# custom provider should satisfy interface below:
+# have methods:
+# - weather_by_name(location_name)
+# return:
+# - location:String
+# - date:Date
+# - weather_state:String
+# - temp_min:Integer
+# - temp_max:Integer
+# - pressure:Integer
+# - humidity:Integer
+# - visibility:Integer
+
+class CustomProvider
+  def weather_by_name(location_name)
+    OpenStruct.new(
+      {
+        location: location_name,
+        date: Date.new,
+        weather_state: 'Sunny',
+        temp_min: 23,
+        temp_max: 25,
+        pressure: 768,
+        humidity: 75,
+        visibility: 100
+      }
+    )
+  end
+end
+
+# Usage
+service = Ipgeobase::Weather.new(:custom_provider, { custom_provider: CustomProvider })
+obj = service.weather_for('The City')
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

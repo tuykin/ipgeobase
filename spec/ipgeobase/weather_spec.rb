@@ -2,6 +2,30 @@ require 'ostruct'
 require 'webmock/rspec'
 
 describe Ipgeobase::Weather do
+  describe 'initialize' do
+    class CustomProvider
+      def weather_by_name(location_name)
+        OpenStruct.new(
+          {
+            location: location_name,
+            date: Date.new,
+            weather_state: 'Sunny',
+            temp_min: 23,
+            temp_max: 25,
+            pressure: 768,
+            humidity: 75,
+            visibility: 100
+          }
+        )
+      end
+    end
+
+    it do
+      service = Ipgeobase::Weather.new(:custom_provider, { custom_provider: CustomProvider })
+      obj = service.weather_for('The City')
+      expect(obj.location).to eq('The City')
+    end
+  end
 
   describe '#weather_for' do
     describe 'metaweather (by default)' do
