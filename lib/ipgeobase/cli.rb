@@ -9,7 +9,7 @@ class Ipgeobase::CLI
       opts.banner = 'Usage: exe/weather [options] city'
 
       opts.on("--service SERVICE_NAME",
-          "The name of weather service. Use one of: #{Ipgeobase::Weather.services.keys.join(', ')}") do |v|
+          "The name of weather service. Use one of: #{Ipgeobase::Weather.service_providers.keys.join(', ')}") do |v|
         options[:service] = v
       end
     end.parse!
