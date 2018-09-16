@@ -12,6 +12,7 @@ class Ipgeobase::Weather::YahooWeather
   def self.map_weather(response)
     OpenStruct.new(
         {
+          location: response.location.city,
           date: response.forecasts[0].date.to_date,
           weather_state: response.forecasts[0].text,
           temp_min: response.forecasts[0].low,

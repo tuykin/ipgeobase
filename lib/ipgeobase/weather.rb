@@ -21,16 +21,20 @@ class Ipgeobase::Weather
     end
   end
 
-  private
-
-  def service_class
-    services[service]
+  def services
+    self.class.services
   end
 
-  def services
+  def self.services
     {
       metaweather: MetaWeather,
       yahooweather: YahooWeather
     }
+  end
+
+  private
+
+  def service_class
+    services[service]
   end
 end

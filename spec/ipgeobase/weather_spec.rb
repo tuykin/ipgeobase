@@ -16,6 +16,7 @@ describe Ipgeobase::Weather do
 
         service = Ipgeobase::Weather.build
         obj = service.weather_for(location_name)
+        expect(obj.location).to eq('London')
         expect(obj.date).to eq(Date.parse('2018-09-15'))
         expect(obj.weather_state).to eq('Heavy Cloud')
         expect(obj.temp_min).to eq(12)
@@ -36,6 +37,7 @@ describe Ipgeobase::Weather do
 
         service = Ipgeobase::Weather.build(service: :yahooweather)
         obj = service.weather_for(location_name)
+        expect(obj.location).to eq('Nice')
         expect(obj.date).to eq(Date.parse('2016-08-17'))
         expect(obj.weather_state).to eq('Thunderstorms')
         expect(obj.temp_min).to eq(20)

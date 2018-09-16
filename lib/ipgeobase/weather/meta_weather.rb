@@ -32,6 +32,7 @@ class Ipgeobase::Weather::MetaWeather
     item = response_hash['consolidated_weather'][0]
     OpenStruct.new(
         {
+          location: response_hash['title'],
           date: Date.parse(item['applicable_date']),
           weather_state: item['weather_state_name'],
           temp_min: item['min_temp'].round,
