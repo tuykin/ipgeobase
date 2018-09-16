@@ -14,10 +14,7 @@ class Ipgeobase::Weather
 
   def initialize(service_provider_key, custom_services = {})
     @service_providers = BASE_SERVICES.merge(custom_services)
-    @default_service_provider_key = service_provider_key
-    @services = {}
-
-    add_service(@default_service_provider_key)
+    init_services(default: service_provider_key)
   end
 
   def weather_for(city, service_provider_key = nil)
@@ -26,7 +23,7 @@ class Ipgeobase::Weather
 
   def services(service_provider_key = nil)
     key = service_provider_key || @default_service_provider_key
-    @services[key] ||= add_service(key)
+    @services[key]
   end
 
   def service_providers
@@ -39,7 +36,11 @@ class Ipgeobase::Weather
 
   private
 
-  def add_service(service_provider_key)
-    @services[service_provider_key] = service_providers[service_provider_key].new
+  def init_services(default:)
+    @default_service_provider_key = default
+    @services = {}
+    service_providers.each do |provider_key, provider_class|
+      @services[provider_key] = provider_class.new
+    end
   end
 end
