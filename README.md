@@ -83,6 +83,23 @@ Ipgeobase.get('178.204.73.174')
 #   @region="Республика Татарстан">
 ```
 
+### Weather tool
+
+To user cli just run
+```(bash)
+exe/weather --service metaweather berlin
+```
+
+To use Ipgeobase::Weather class:
+```(ruby)
+service = Ipgeobase::Weather.build(service: <service name>)
+weather = service.weather_for('berlin')
+
+# <service_name>:
+#   - :yahooweather
+#   - :metaweather
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
